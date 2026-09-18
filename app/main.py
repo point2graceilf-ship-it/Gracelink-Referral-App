@@ -48,8 +48,8 @@ class Login(BaseModel): email:EmailStr; password:str
 class PropertyIn(BaseModel): name:str; city:str; state:str="FL"; description:str=""; available_beds:int=0
 class ResourceIn(BaseModel): name:str; category:str; service_area:str; description:str=""
 class ReferralIn(BaseModel): receiver_org_id:int; client_first_name:str; client_last_initial:str=""; preferred_area:str=""; budget:Optional[int]=None; notes:str=""; consent_attested:bool
-class StatusIn(BaseModel): status:str
-app=FastAPI(title="GraceLink Referral Network",version="1.2")
+class StatusIn(BaseModel): status:str\nclass AvailabilityIn(BaseModel): available_beds:int
+app=FastAPI(title="GraceLink Referral Network",version="1.3-stage3")
 ENV=os.getenv("GRACELINK_ENV","development").lower()
 if ENV=="production" and (SECRET=="DEVELOPMENT-ONLY-CHANGE-ME" or len(SECRET)<32): raise RuntimeError("Production requires strong GRACELINK_SECRET")
 app.add_middleware(CORSMiddleware,allow_origins=[x.strip() for x in os.getenv("ALLOWED_ORIGINS","*").split(",")],allow_methods=["*"],allow_headers=["*"])
